@@ -1,5 +1,3 @@
-package consultoraserver2;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,10 +8,11 @@ public class CompanyADjdbc {
     SucursalDP sucursalDP;
     ProveedorDP proveedorDP;
     LineaDP lineaDP;
-    ProductoDP productoDP = new ProductoDP();
+	// ProductoDP productoDP;
+	/*
     TieneDP tieneDP;
     SuministraDP suministraDP;
-    LocalidadDP localidadDP;
+    LocalidadDP localidadDP;*/
     
     Connection conexion;
     Statement statement;
@@ -60,7 +59,7 @@ public class CompanyADjdbc {
 			statement.executeUpdate(insert);
 		
 			// 3. Cerrar archivo		
-                        statement.close();
+            statement.close();
 
 			// 4. Enviar recibo de 
 			resultado = "Captura correcta";	
@@ -226,7 +225,7 @@ public class CompanyADjdbc {
                         lineaDP.setNombre(sr.getString(2));	
                         lineaDP.setDescripcion(sr.getString(3));		
 
-                        datos=datos+lineaDP.toString() + "*";
+                        datos=datos+lineaDP.toString()+"*";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -238,7 +237,7 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-    
+    /*
     String AltaProductos(String datos) 
     {
 		String resultado = "";
@@ -295,7 +294,7 @@ public class CompanyADjdbc {
                         productoDP.setprecioUnitario(sr.getInt(5));
                         productoDP.setclaveLinea(sr.getInt(6));
 
-                        datos=datos+productoDP.toString() + "*";
+                        datos=datos+productoDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -307,7 +306,7 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-
+    
     String AltaTiene(String datos) 
     {
 		String resultado = "";
@@ -361,7 +360,7 @@ public class CompanyADjdbc {
                         tieneDP.setClaveProducto(sr.getInt(2));	
                       
 
-                        datos=datos+tieneDP.toString() + "*";
+                        datos=datos+tieneDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -412,7 +411,7 @@ public class CompanyADjdbc {
 		}
 		return resultado;	
 	}
-    String consultarSuministra() {
+    String consultarSuminstra() {
 		String datos = "";
 		String query   = "";
 	
@@ -436,7 +435,7 @@ public class CompanyADjdbc {
                         suministraDP.setCantidad(sr.getInt(4));	
                       
 
-                        datos=datos+suministraDP.toString() + "*";
+                        datos=datos+suministraDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -505,7 +504,7 @@ public class CompanyADjdbc {
                         localidadDP.setTelefono(sr.getInt(6));
                         localidadDP.setClaveSucursal(sr.getInt(7));
 
-                        datos=datos+localidadDP.toString() + "*";
+                        datos=datos+localidadDP.toString()+"\n";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -517,8 +516,8 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-/* Consulta los productos de una linea 
-    String consultarLineaProd(int clave) {
+/* Consulta los productos de una linea */
+    String consultarLineaProd(String clave) {
 		String datos = "";
 		String respuesta = "";
               
@@ -535,9 +534,8 @@ public class CompanyADjdbc {
 				datos = tr.getString(1);
 				String iString = "" +tr.getInt(2);
 
-				datos = datos+"_"+iString+"\n";
+				datos = datos+"_"+iString+"*";
 				respuesta = respuesta + datos;
-
                 // System.out.println(respuesta);
             } 
             statement.close();
@@ -548,8 +546,9 @@ public class CompanyADjdbc {
         }
         return respuesta;
 	}
+	
 /* Productos de un proveedor */
-    String consultarProveedorProducto(int clv) {
+    String consultarProveedorProducto(String clv) {
 		String datos = "";
 		String respuesta = "";
         ResultSet tr;
@@ -569,7 +568,7 @@ public class CompanyADjdbc {
 				String clave = "" +tr.getInt(4);
 				String nombre2 = tr.getString(5);
 				
-				datos = nombre+"_"+telefono+"_"+direccion+"_"+clave+"_"+nombre2+"\n";
+				datos = nombre+"_"+telefono+"_"+direccion+"_"+clave+"_"+nombre2+"*";
 				respuesta = respuesta + datos;
                 // System.out.println(respuesta);
             } 
@@ -581,12 +580,12 @@ public class CompanyADjdbc {
         return respuesta;
 	}
 /* Productos de una sucursal */
-    String consultarProductoSucursal(int sucursal) {
+    String consultarProductoSucursal(String sucursal) {
 		String datos = "";
 		String respuesta = "";
         ResultSet tr;
         
-		String query = "SELECT Sucursal.claveSucursal, Sucursal.nombre, Sucursal.direccion, Producto.claveProducto, Producto.nombre FROM Tiene JOIN Producto ON Tiene.numeroProducto = Producto.claveProducto JOIN Sucursal ON Tiene.numeroSucursal = Sucursal.claveSucursal WHERE numeroSucursal = "+sucursal;
+		String query = "SELECT Sucursal.claveSucursal, Sucursal.nombre, Sucursal.direccion, Producto.claveProducto, Producto.nombre Producto.precio FROM Tiene JOIN Producto ON Tiene.numeroProducto = Producto.claveProducto JOIN Sucursal ON Tiene.numeroSucursal = Sucursal.claveSucursal WHERE numeroSucursal = "+sucursal;
 
 		System.out.println(query);
         
@@ -600,8 +599,9 @@ public class CompanyADjdbc {
 				String v3 = tr.getString(3);
 				String v4 = "" +tr.getInt(4);
 				String v5 = tr.getString(5);
+				String v6 = "" +tr.getInt(4);
 				
-				datos = v1+"_"+v2+"_"+v3+"_"+v4+"_"+v5+"\n";
+				datos = v1+"_"+v2+"_"+v3+"_"+v4+"_"+v5+"_"+v6+"*";
 				respuesta = respuesta + datos;
                 // System.out.println(respuesta);
             } 
@@ -612,8 +612,8 @@ public class CompanyADjdbc {
         }
         return respuesta;
     }
-/* Productos en una sucursal 
-    String consultarSucursalProducto(int producto) {
+/* Productos en una sucursal */
+    String consultarSucursalProducto(String producto) {
 		String datos = "";
 		String respuesta = "";
         ResultSet tr;
@@ -631,10 +631,9 @@ public class CompanyADjdbc {
 				String v3 = tr.getString(3);
 				String v4 = tr.getString(4);
 				String v5 = "" +tr.getInt(5);
-				String v6 = "" +tr.getInt(5);
+				String v6 = "" +tr.getInt(6);
 
-				
-				datos = v1+"_"+v2+"_"+v3+"_"+v4+"_"+v5+"_"+v6+"\n";
+				datos = v1+"_"+v2+"_"+v3+"_"+v4+"_"+v5+"_"+v6+"*";
 				respuesta = respuesta + datos;
                 // System.out.println(respuesta);
             } 
@@ -644,7 +643,6 @@ public class CompanyADjdbc {
             respuesta = "Error consultar los productos de una sucursal "+sqle;
         }
         return respuesta;
-    }
-    */      
+    }   
 }
 
