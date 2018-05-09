@@ -10,10 +10,10 @@ public class CompanyADjdbc {
     SucursalDP sucursalDP;
     ProveedorDP proveedorDP;
     LineaDP lineaDP;
-    /*ProductoDP productoDP = new ProductoDP();
+    ProductoDP productoDP = new ProductoDP();
     TieneDP tieneDP;
     SuministraDP suministraDP;
-    LocalidadDP localidadDP;*/
+    LocalidadDP localidadDP;
     
     Connection conexion;
     Statement statement;
@@ -226,7 +226,7 @@ public class CompanyADjdbc {
                         lineaDP.setNombre(sr.getString(2));	
                         lineaDP.setDescripcion(sr.getString(3));		
 
-                        datos=datos+lineaDP.toString()+"*";
+                        datos=datos+lineaDP.toString() + "*";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -238,7 +238,7 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-    /*
+    
     String AltaProductos(String datos) 
     {
 		String resultado = "";
@@ -295,7 +295,7 @@ public class CompanyADjdbc {
                         productoDP.setprecioUnitario(sr.getInt(5));
                         productoDP.setclaveLinea(sr.getInt(6));
 
-                        datos=datos+productoDP.toString()+"\n";
+                        datos=datos+productoDP.toString() + "*";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -307,7 +307,7 @@ public class CompanyADjdbc {
 		}
 		return datos;	  
     }
-    
+
     String AltaTiene(String datos) 
     {
 		String resultado = "";
@@ -361,7 +361,7 @@ public class CompanyADjdbc {
                         tieneDP.setClaveProducto(sr.getInt(2));	
                       
 
-                        datos=datos+tieneDP.toString()+"\n";
+                        datos=datos+tieneDP.toString() + "*";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -412,7 +412,7 @@ public class CompanyADjdbc {
 		}
 		return resultado;	
 	}
-    String consultarSuminstra() {
+    String consultarSuministra() {
 		String datos = "";
 		String query   = "";
 	
@@ -436,7 +436,7 @@ public class CompanyADjdbc {
                         suministraDP.setCantidad(sr.getInt(4));	
                       
 
-                        datos=datos+suministraDP.toString()+"\n";
+                        datos=datos+suministraDP.toString() + "*";
                         }
         	statement.close();
         	System.out.println(query); 
@@ -505,7 +505,7 @@ public class CompanyADjdbc {
                         localidadDP.setTelefono(sr.getInt(6));
                         localidadDP.setClaveSucursal(sr.getInt(7));
 
-                        datos=datos+localidadDP.toString()+"\n";
+                        datos=datos+localidadDP.toString() + "*";
                         }
         	statement.close();
         	System.out.println(query); 

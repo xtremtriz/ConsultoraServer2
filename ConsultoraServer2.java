@@ -179,6 +179,79 @@ public class ConsultoraServer2 extends JFrame{
                     // 5.5 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
+                
+                if(transaccion.equals("AltaProductos"))
+                {
+                    // 5.1 Obtener el número de cta
+                    String cancion = recibirDatos();
+
+                    // 5.2 Realizar transacción con la DB
+                    datos = companyad.AltaProductos(cancion);
+
+                    // 5.3 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if (transaccion.equals("consultarProducto")) {
+                    // 5.4 Obtener el número de cta
+                    datos = companyad.consultarProducto();
+
+                    // 5.5 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if(transaccion.equals("AltaTiene"))
+                {
+                    // 5.1 Obtener el número de cta
+                    String cancion = recibirDatos();
+
+                    // 5.2 Realizar transacción con la DB
+                    datos = companyad.AltaTiene(cancion);
+
+                    // 5.3 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if (transaccion.equals("consultarTiene")) {
+                    // 5.4 Obtener el número de cta
+                    datos = companyad.consultarTiene();
+
+                    // 5.5 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if(transaccion.equals("altaSuministra"))
+                {
+                    // 5.1 Obtener el número de cta
+                    String cancion = recibirDatos();
+
+                    // 5.2 Realizar transacción con la DB
+                    datos = companyad.altaSuministra(cancion);
+
+                    // 5.3 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if (transaccion.equals("consultarSuministra")) {
+                    // 5.4 Obtener el número de cta
+                    datos = companyad.consultarSuministra();
+
+                    // 5.5 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if(transaccion.equals("altaLocalidad"))
+                {
+                    // 5.1 Obtener el número de cta
+                    String cancion = recibirDatos();
+
+                    // 5.2 Realizar transacción con la DB
+                    datos = companyad.altaLocalidad(cancion);
+
+                    // 5.3 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
+                if (transaccion.equals("consultarLocalidad")) {
+                    // 5.4 Obtener el número de cta
+                    datos = companyad.consultarLocalidad();
+
+                    // 5.5 Enviar datosde la consulta al cliente
+                    enviarDatos(datos);
+                }
                 taDatos.append("Transacción realizada: " + transaccion);
 
                 // 6. Cerrar conexion
