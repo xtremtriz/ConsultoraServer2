@@ -1,14 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package consultoraserver2;
-
-/**
- *
- * @author Ariana
- */
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
@@ -58,7 +47,7 @@ public class ConsultoraServer2 extends JFrame{
     
     private String recibirDatos()
     {
-        String datos="";
+        String datos = "";
         
         try
         {
@@ -104,7 +93,7 @@ public class ConsultoraServer2 extends JFrame{
             
             while(true)
             {
-                taDatos.append("\nServer Banco: estado listen()\n Esperando peticiones de conexion...\n");
+                taDatos.append("\nServer distribuidora: estado listen()\n Esperando peticiones de conexion...\n");
                 
                 // 2. Al escuchar una peticion de conexion hacer el accept()
                 socket = ServerDB.accept();
@@ -165,95 +154,54 @@ public class ConsultoraServer2 extends JFrame{
                 {
                     // 5.1 Obtener el número de cta
                     String cancion = recibirDatos();
-
+                    
                     // 5.2 Realizar transacción con la DB
                     datos = companyad.AltaLinea(cancion);
-
+                    
                     // 5.3 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
                 if (transaccion.equals("consultarLinea")) {
                     // 5.4 Obtener el número de cta
                     datos = companyad.consultarLinea();
-
+                    
                     // 5.5 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
+                if (transaccion.equals("consultarLineaProd")) {
+                    String linea = recibirDatos();
+                    // 5.4 Obtener el número de cta
+                    datos = companyad.consultarLineaProd(linea);
                 
-                if(transaccion.equals("AltaProductos"))
-                {
-                    // 5.1 Obtener el número de cta
-                    String cancion = recibirDatos();
-
-                    // 5.2 Realizar transacción con la DB
-                    datos = companyad.AltaProductos(cancion);
-
-                    // 5.3 Enviar datosde la consulta al cliente
-                    enviarDatos(datos);
-                }
-                if (transaccion.equals("consultarProducto")) {
-                    // 5.4 Obtener el número de cta
-                    datos = companyad.consultarProducto();
-
                     // 5.5 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
-                if(transaccion.equals("AltaTiene"))
-                {
-                    // 5.1 Obtener el número de cta
-                    String cancion = recibirDatos();
-
-                    // 5.2 Realizar transacción con la DB
-                    datos = companyad.AltaTiene(cancion);
-
-                    // 5.3 Enviar datosde la consulta al cliente
-                    enviarDatos(datos);
-                }
-                if (transaccion.equals("consultarTiene")) {
+                if (transaccion.equals("consultarProveedorProducto")) {
+                    String clave = recibirDatos();
                     // 5.4 Obtener el número de cta
-                    datos = companyad.consultarTiene();
-
+                    datos = companyad.consultarProveedorProducto(clave);
+                
                     // 5.5 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
-                if(transaccion.equals("altaSuministra"))
-                {
-                    // 5.1 Obtener el número de cta
-                    String cancion = recibirDatos();
-
-                    // 5.2 Realizar transacción con la DB
-                    datos = companyad.altaSuministra(cancion);
-
-                    // 5.3 Enviar datosde la consulta al cliente
-                    enviarDatos(datos);
-                }
-                if (transaccion.equals("consultarSuministra")) {
+                if (transaccion.equals("consultarProductoSucursal")) {
+                    String clave = recibirDatos();
                     // 5.4 Obtener el número de cta
-                    datos = companyad.consultarSuministra();
-
+                    datos = companyad.consultarProductoSucursal(clave);
+                
                     // 5.5 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
-                if(transaccion.equals("altaLocalidad"))
-                {
-                    // 5.1 Obtener el número de cta
-                    String cancion = recibirDatos();
-
-                    // 5.2 Realizar transacción con la DB
-                    datos = companyad.altaLocalidad(cancion);
-
-                    // 5.3 Enviar datosde la consulta al cliente
-                    enviarDatos(datos);
-                }
-                if (transaccion.equals("consultarLocalidad")) {
+                if (transaccion.equals("consultarSucursalProducto")) {
+                    String clave = recibirDatos();
                     // 5.4 Obtener el número de cta
-                    datos = companyad.consultarLocalidad();
-
+                    datos = companyad.consultarSucursalProducto(clave);
+                
                     // 5.5 Enviar datosde la consulta al cliente
                     enviarDatos(datos);
                 }
+
                 taDatos.append("Transacción realizada: " + transaccion);
-
                 // 6. Cerrar conexion
                 cerrarConexion();
 
